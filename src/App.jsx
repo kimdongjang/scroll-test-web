@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import logo from './logo.svg';
-import Test from './Test';
+import ScrollTest from './ScrollTest';
 import Test2 from './Test2';
+import ReponsiveTest from './ReponsiveTest';
 
 
 function App() {
   return (
-    <Test />
+    <ScrollTest />
   );
 }
 

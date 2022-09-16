@@ -1,0 +1,13 @@
+.container {
+  /* Content is centered horizontally */
+}
+
+.container__content {
+  /* We won't see the separator line */
+  background: black;
+}
+
+.container__separator {
+  border-bottom: 1px solid black;
+  height: 1px;
+}
