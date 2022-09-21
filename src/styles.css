@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #070707;
+  color: #fff;
+}
+a:link,
+a:hover,
+a:active,
+a:visited {
+  color: #eee;
+  border-top: 1px solid #434141;
+  border-bottom: 3px solid #434141;
+  border-radius: 20px;
+}

@@ -5,6 +5,7 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler"
 
 import tw from "tailwind-styled-components"
 import useScrollFadeIn from './hooks/useScrollFadeIn';
+import useWindowResize from './hooks/useWindowSize';
 
 const MainWrapper = tw.div`
   w-full flex flex-col 
@@ -17,20 +18,35 @@ const SectionData = tw.section`
   `
 
 const ScrollTest = () => {
-  const scrollRefs = useRef([]);
-  /**
-   * navigation 리스트 별로 ref 초기화
-   */
-  const list = ["MAIN", "INTRODUCE", "CASTER", "test4"];
-  scrollRefs.current = list.map((_, i) => scrollRefs.current[i] ?? createRef());
-
-  //이전 스크롤 초기값
-  const beforeScrollY = useRef(0);
   const [scrollIndex, setScrollIndex] = useState(1);
-
-  let cur = 0;
-
+  const [translateValue, setTranslateValue] = useState(0);
   const outerDivRef = useRef();
+
+
+  const windowSize = useWindowResize();
+  let cur = 1;
+  const max = 4;
+
+  const moveDown = () => {
+    setTranslateValue((prev) => prev + windowSize.height);
+  };
+
+  const moveUp = () => {
+    setTranslateValue((prev) => prev - windowSize.height);
+  };
+  const wheelHandler = (e) => {
+    console.log(windowSize.height)
+    // const { deltaY } = e;
+    // if (deltaY > 0) {
+    //   // 스크롤 위
+    //   moveUp();
+
+    // } else {
+    //   // 스크롤 아래
+    //   moveDown();
+    // }
+  }
+
   // useEffect(() => {
   //   const wheelHandler = (e) => {
   //     e.preventDefault();
@@ -65,15 +81,28 @@ const ScrollTest = () => {
   //   };
   // }, []);
 
-  const animatedItem = useScrollFadeIn();
+  const [translateY, setTranslateY] = useState(0);
+  useEffect(() => {
+    const outerDivRefCurrent = outerDivRef.current;
+    outerDivRefCurrent.addEventListener("wheel", wheelHandler);
+    return () => {
+      outerDivRefCurrent.removeEventListener("wheel", wheelHandler);
+    }
+  }, []);
 
+  useEffect(() => {
+    outerDivRef.current.style.transition = 'all 0.5s ease-in-out';
+    outerDivRef.current.style.transform = `translateY(-${translateValue}px)`;
+
+  }, [translateValue])
 
   return (
     <MainWrapper>
-      <Container ref={outerDivRef}>
-        <SectionData ref={scrollRefs.current[0]}>
-        </SectionData>
-        <SectionData {...animatedItem} >2</SectionData>
+      <Container ref={outerDivRef} >
+        <SectionData />
+        <SectionData />
+        <SectionData />
+        <SectionData />
       </Container >
     </MainWrapper>
   )
