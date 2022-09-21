@@ -23,7 +23,7 @@ const ScrollTest = () => {
   const outerDivRef = useRef();
 
 
-  const windowSize = useWindowResize();
+  const windowSize = useWindowResize(outerDivRef.current);
   let cur = 1;
   const max = 4;
 
@@ -84,9 +84,9 @@ const ScrollTest = () => {
   const [translateY, setTranslateY] = useState(0);
   useEffect(() => {
     const outerDivRefCurrent = outerDivRef.current;
-    outerDivRefCurrent.addEventListener("wheel", wheelHandler);
+    outerDivRefCurrent.addEventListener("scroll", wheelHandler);
     return () => {
-      outerDivRefCurrent.removeEventListener("wheel", wheelHandler);
+      outerDivRefCurrent.removeEventListener("scroll", wheelHandler);
     }
   }, []);
 

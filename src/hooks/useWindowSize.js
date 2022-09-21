@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 
-const useWindowResize = () => {
+const useWindowResize = (ref) => {
   const [currentWidth, setCurrentWidth] = useState(0);
   const [currentHeight, setCurrentHeight] = useState(0);
 
