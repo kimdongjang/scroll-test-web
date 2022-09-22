@@ -67,6 +67,7 @@ const ScrollTest = () => {
   //   setScrollIndex(scrollIndex - 1);
   // };
 
+  let timeout;
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return {
@@ -76,6 +77,7 @@ const ScrollTest = () => {
   }
 
 
+
   useEffect(() => {
     const initTouch = (e) => {
       initialY = `${e.touches ? e.touches[0].clientY : e.clientY}`;
@@ -83,14 +85,19 @@ const ScrollTest = () => {
 
     const wheelHandler = (e) => {
       e.preventDefault();
-      windowSize.current = getWindowDimensions();
-      const { deltaY } = e;
-      if (deltaY < 0) {
-        moveUp()
-      }
-      else if (deltaY > 0) {
-        moveDown()
-      }
+      clearTimeout(timeout);//이전 휠 이벤트 제거
+      timeout = setTimeout(function () {
+
+        windowSize.current = getWindowDimensions();
+        const { deltaY } = e;
+        if (deltaY < 0) {
+          moveUp()
+        }
+        else if (deltaY > 0) {
+          moveDown()
+        }
+
+      }, 300);
 
     }
 
