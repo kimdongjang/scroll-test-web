@@ -24,8 +24,9 @@ const ScrollTest = () => {
   const outerDivRef = useRef();
 
   const windowSize = useRef(getWindowDimensions());
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  // const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const [scrollIndex, setScrollIndex] = useState(0);
+  const [sectionHeight, setSectionHeight] = useState(getWindowDimensions().height);
   const SectionList = 5;
 
   let scrollIndexLet = 0;
@@ -113,9 +114,8 @@ const ScrollTest = () => {
     }
 
     const handleResize = () => {
-      console.log("=== resize ===")
       windowSize.current = getWindowDimensions();
-      console.log(windowSize.current)
+      setSectionHeight(windowSize.current)
     }
 
     var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
