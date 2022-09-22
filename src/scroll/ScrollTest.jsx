@@ -17,7 +17,7 @@ const SectionData = tw.section`
   m-8 bg-blue-800
   `
 
-const DIVIDER_HEIGHT = 5;
+const DIVIDER_HEIGHT = 4;
 
 
 const ScrollTest = () => {
@@ -30,11 +30,12 @@ const ScrollTest = () => {
   const SectionList = 5;
 
   let scrollIndexLet = 0;
+  let timeout = useRef();
   let initialY = null;
 
 
   const moveDown = () => {
-    if (DIVIDER_HEIGHT <= scrollIndexLet) return;
+    if (DIVIDER_HEIGHT - 1 <= scrollIndexLet) return;
     scrollIndexLet += 1;
     setScrollIndex(scrollIndexLet);
   };
@@ -67,7 +68,6 @@ const ScrollTest = () => {
   //   setScrollIndex(scrollIndex - 1);
   // };
 
-  let timeout;
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return {
@@ -85,8 +85,8 @@ const ScrollTest = () => {
 
     const wheelHandler = (e) => {
       e.preventDefault();
-      clearTimeout(timeout);//이전 휠 이벤트 제거
-      timeout = setTimeout(function () {
+      clearTimeout(timeout.current);//이전 휠 이벤트 제거
+      timeout.current = setTimeout(function () {
 
         windowSize.current = getWindowDimensions();
         const { deltaY } = e;
@@ -97,7 +97,7 @@ const ScrollTest = () => {
           moveDown()
         }
 
-      }, 300);
+      }, 200);
 
     }
 
