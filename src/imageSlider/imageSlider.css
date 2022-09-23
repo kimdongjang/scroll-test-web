@@ -1,0 +1,18 @@
+.imageSlideWrap {
+  position: relative;
+}
+
+.imageSliderContainer {
+  overflow: hidden;
+  height: 500px;
+  width: 100%;
+}
+.imageContent {
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+.buttonContainer {
+  position: absoulte;
+}
