@@ -10,8 +10,8 @@ const ImageSlider = ({ data }) => {
 
 
   const [style, setStyle] = useState({
-    height: '100%',
-    width: '100%',
+    transform: `translateX(-${currentImgIndex}00%)`,
+    transition: `all 0.4s ease-in-out`,
   });
 
 
@@ -30,23 +30,22 @@ const ImageSlider = ({ data }) => {
     })
 
   }
-  useEffect(() => {
-    if (currentImgIndex === 0) {
-      setCurrentImgIndex(imageList.length - 2);
-      setTimeout(function () {
-        setStyle({
-          transform: `translateX(-${imageList.length - 2}00%)`,
-          transition: '0ms',
-        });
-      }, 2000);
-    }
-
-  }, [])
+  // useEffect(() => {
+  //   if (currentImgIndex === 0) {
+  //     setCurrentImgIndex(imageList.length - 2);
+  //     setTimeout(function () {
+  //       setStyle({
+  //         transform: `translateX(-${imageList.length - 2}00%)`,
+  //         transition: '0ms',
+  //       });
+  //     }, 2000);
+  //   }
+  // }, [])
 
   return (
-    <div className="imageSlideWrap">
-      <div className="imageSliderContainer">
-        <div style={style} className="flex">
+    <div className="imageSlideWrap flex justify-center items-center h-screen">
+      <div className="overflow-hidden max-w-[480px] min-w-[280px] w-full bg-black">
+        <div style={style} className={`flex`}>
           {imageList?.map((image, i) => {
             return (
               // eslint-disable-next-line jsx-a11y/alt-text

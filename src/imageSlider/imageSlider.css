@@ -1,16 +1,16 @@
 .imageSlideWrap {
   position: relative;
+  width: 100%;
 }
 
 .imageSliderContainer {
   overflow: hidden;
   height: 500px;
-  width: 100%;
 }
 .imageContent {
-  height: auto;
-  width: auto;
-  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
 }
 
 .buttonContainer {
